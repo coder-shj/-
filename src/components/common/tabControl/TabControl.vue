@@ -25,6 +25,7 @@
     methods: {
       divclick(index) {
         this.nowindex = index
+        this.$emit('itemclick', index)
       }
     }
   };
