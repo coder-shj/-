@@ -1,6 +1,7 @@
 <template>
   <div class="content">
     <ul>
+      <button @click="btnclick">按钮</button>
       <li>分类列表1</li>
       <li>分类列表2</li>
       <li>分类列表3</li>
@@ -110,6 +111,16 @@
 
   export default {
     name: "Category",
+    data() {
+      return {
+        bscroll: null
+      }
+    },
+    methods: {
+      btnclick() {
+        console.log('btnclick');
+      }
+    },
     created() {
       // 不能再created生命函数中使用下方法，因为created时组件还没有进行渲染，无法得到其内组件
       // this.scroll = new BSscroll('.wrapper', {
@@ -117,20 +128,36 @@
       // })
     },
     mounted() {
-      new BSscroll('.content', {
+      this.bscroll = new BSscroll('.content', {
+        probeType: 3,
+        pullUpLoad: true
+      })
 
+      this.bscroll.on('scroll', (position) => {
+        console.log(position);
+      })
+
+      this.bscroll.on('pullingUp', () => {
+        console.log('上拉加载更多')
+        // 发送网络请求，请求更多数据
+
+        // 等待数据请求完成，并且将新的数据展示出来后
+        setTimeout(() => {
+          bscroll.finishPullUp()
+        }, 2000);
       })
     }
   };
 </script>
 
-<style>
-  /* 原生滚动使用 */
+<style scoped>
+  
   .content {
     height: 200px;
     background-color: red;
 
     overflow: hidden;
+    /* 原生滚动使用 */
     /* overflow-y: scroll; */
   }
 </style>
