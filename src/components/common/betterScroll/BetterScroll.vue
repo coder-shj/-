@@ -17,12 +17,16 @@
       }
     },
     methods: {
-      scrollTo(x, y, time = 500) {  //time给予默认值300
-      // scrollTo中有三个参数x,y,time(毫秒)
-        this.bscroll.scrollTo(x, y, time)
+      scrollTo(x, y, time = 400) {  //time给予默认值300
+        // scrollTo中有三个参数x,y,time(毫秒)
+        // 判断下bscroll是否加载完成，决定是否执行此代码
+        this.bscroll && this.bscroll.scrollTo(x, y, time)
       },
       finishPullUp() {
         this.bscroll.finishPullUp()
+      },
+      refresh() {
+        this.bscroll && this.bscroll.refresh()
       }
     },
     props: {
@@ -45,7 +49,6 @@
 
       // 2、监听滚动位置
       this.bscroll.on('scroll', (position) => {
-        // console.log(position);
         this.$emit('scroll', position)
       })
 

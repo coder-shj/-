@@ -1,6 +1,6 @@
 <template>
     <div class="GoodListItem">
-      <img :src="goodsitem.show.img" alt="">
+      <img :src="goodsitem.show.img" alt="" @load="imgLoad">
       <div class="goodinfo">
         <p class="collect">{{goodsitem.title}}</p>
         <span class="price">{{goodsitem.price}}</span>
@@ -16,6 +16,12 @@
       goodsitem: {
         type: Object,
         default: {}
+      }
+    },
+    methods: {
+      imgLoad() {
+        // 事件总线
+        this.$bus.$emit('itemImgLoad')
       }
     }
   };
