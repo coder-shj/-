@@ -36,7 +36,6 @@
     display: flex;
     text-align: center;
     background-color: #fff;
-    margin-bottom: 5px;
   }
   .tab-control span {
     padding: 3px;
@@ -44,7 +43,7 @@
   .tab-control-item {
     flex: 1;
     font-size: 15px;
-    height: 30px;
+    height: 35px;
     line-height: 30px;
   }
 
