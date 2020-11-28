@@ -1,5 +1,5 @@
 <template>
-    <div class="GoodListItem">
+    <div class="GoodListItem" @click="goodsItemClick">
       <img :src="goodsitem.show.img" alt="" @load="imgLoad">
       <div class="goodinfo">
         <p class="collect">{{goodsitem.title}}</p>
@@ -22,6 +22,9 @@
       imgLoad() {
         // 事件总线
         this.$bus.$emit('itemImgLoad')
+      },
+      goodsItemClick() {
+        this.$router.push('/detail/' + this.goodsitem.iid)
       }
     }
   };

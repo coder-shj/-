@@ -10,6 +10,7 @@
       v-show="isTabFixed"
       ref="tabControl2"
     ></tab-control>
+
     <better-scroll
       ref="wrapper"
       class="content"
@@ -29,6 +30,7 @@
       ></tab-control>
       <good-list :goods="showGoods"></good-list>
     </better-scroll>
+    
     <back-top
       @click.native="topclick"
       class="backtop"
@@ -81,6 +83,7 @@ export default {
       showtop: false,
       tabOffsetTop: 0,
       isTabFixed: false,
+      scollY: 0
     };
   },
   created() {
@@ -91,6 +94,14 @@ export default {
     this.getHomeGoods("pop");
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
+  },
+  activated() {
+    this.$refs.wrapper.scrollTo(0, this.scollY, 0)
+
+    this.$refs.wrapper.refresh()
+  },
+  deactivated() {
+    this.scollY = this.$refs.wrapper.getScrollY()
   },
   mounted() {
     // 3、监听item中图片加载完成
@@ -116,7 +127,6 @@ export default {
       // 获取tabControl的offsetTop
       // 所有的组件都有一个属性$el，用于获取组件内的元素
       this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop;
-      console.log(this.tabOffsetTop);
     },
     topclick() {
       this.$refs.wrapper.scrollTo(0, 0);

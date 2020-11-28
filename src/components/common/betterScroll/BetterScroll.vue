@@ -30,6 +30,9 @@ export default {
       // console.log('------');
       this.bscroll && this.bscroll.refresh();
     },
+    getScrollY() {
+      return this.bscroll ? this.bscroll.y : 0
+    }
   },
   props: {
     probeType: {
@@ -60,7 +63,7 @@ export default {
     if (this.pullUpLoad) {
       this.bscroll.on("pullingUp", () => {
         this.$emit("pullingUp");
-        console.log("监听滚动到底部");
+        // console.log("监听滚动到底部");
       });
     }
   },
