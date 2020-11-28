@@ -6,6 +6,7 @@
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shop="shop"></detail-shop-info>
       <detail-goods-info :detail-info="detailInfo" @imageload="imageload"/>
+      <detail-param-info :param-info="paramInfo"></detail-param-info>
     </better-scroll>
   </div>
 </template>
@@ -16,11 +17,12 @@
   import DetailBaseInfo from './childrenComps/DetailBaseInfo'
   import DetailShopInfo from './childrenComps/DetailShopInfo'
   import DetailGoodsInfo from './childrenComps/DetailGoodsInfo'
+  import DetailParamInfo from './childrenComps/DetailParamInfo'
 
   import BetterScroll from "components/common/betterScroll/BetterScroll.vue"
 
   import {debounce} from "common/utils.js"
-  import {getDetail, Goods, Shop} from 'network/detail.js'
+  import {getDetail, Goods, Shop, GoodsParam} from 'network/detail.js'
   export default {
     name: "detail",
     data() {
@@ -29,7 +31,8 @@
         topImages: [],
         goods: {},
         shop: {},
-        detailInfo: {}
+        detailInfo: {},
+        paramInfo: {}
       }
     },
     components: {
@@ -38,7 +41,8 @@
       DetailBaseInfo,
       DetailShopInfo,
       BetterScroll,
-      DetailGoodsInfo
+      DetailGoodsInfo,
+      DetailParamInfo
     },
     created() {
       this.id = this.$route.params.id
@@ -57,6 +61,9 @@
 
         // 获取商品信息
         this.detailInfo = data.detailInfo
+
+        // 获取参数信息
+        this.paramInfo = new GoodsParam(data.itemParams.info, data.itemParams.rule)
       })
     },
     methods: {

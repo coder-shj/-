@@ -29,13 +29,13 @@
       }
     },
     watch: {
-      detailInfo() {//获取图片个数
-        this.imagesLenth = this.detailInfo.detailImage[0].list.length
+      detailInfo() {
+        this.imagesLenth = this.detailInfo.detailImage[0].list && this.detailInfo.detailImage[0].list.length
       }
     },
     methods: {
       imgload() {
-        // 所有图片加载完之后，发射一次函数
+        // 所有图片加载完之后，发射一次
         if (++this.counter == this.imagesLenth){
           this.$emit('imageload')
         }
