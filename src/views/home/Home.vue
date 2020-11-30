@@ -51,7 +51,7 @@ import BetterScroll from "components/common/betterScroll/BetterScroll.vue";
 import BackTop from "components/content/backTop/BackTop.vue";
 
 import { getHomeMultidate, getHomeGoods } from "network/home";
-import { debounce } from "common/utils.js";
+import {itemListenerMinxin} from 'common/mixin.js'
 
 export default {
   name: "Home",
@@ -65,6 +65,7 @@ export default {
     BetterScroll,
     BackTop,
   },
+  mixins: [itemListenerMinxin],
   computed: {
     showGoods() {
       return this.goods[this.nowType].list;
@@ -83,7 +84,8 @@ export default {
       showtop: false,
       tabOffsetTop: 0,
       isTabFixed: false,
-      scollY: 0
+      scollY: 0,
+      init: 0
     };
   },
   created() {
@@ -97,11 +99,18 @@ export default {
   },
   activated() {
     this.$refs.wrapper.scrollTo(0, this.scollY, 0)
-
     this.$refs.wrapper.refresh()
+
+    // 重新回到主页后，再次打开事件监听
+    if(this.init++ !== 0){
+      this.$bus.$on("itemImgLoad", this.refresh);
+    }
   },
   deactivated() {
     this.scollY = this.$refs.wrapper.getScrollY()
+
+    // 离开首页时，取消对于事件总线的监听
+    this.$bus.$off("itemImgLoad", this.refresh)
   },
   mounted() {
     // 3、监听item中图片加载完成
@@ -114,10 +123,7 @@ export default {
     // })
 
     // 防抖动监听图片加载
-    const refresh = debounce(this.$refs.wrapper.refresh);
-    this.$bus.$on("itemImgLoad", () => {
-      refresh();
-    });
+    // 实现代码在混入中
   },
   methods: {
     /**

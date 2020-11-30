@@ -17,11 +17,13 @@ export default {
     };
   },
   methods: {
-    scrollTo(x, y, time = 400) {
+    scrollTo(x, y, time = 300) {
       //time给予默认值300
       // scrollTo中有三个参数x,y,time(毫秒)
       // 判断下bscroll是否加载完成，决定是否执行此代码
-      this.bscroll && this.bscroll.scrollTo(x, y, time);
+      setTimeout(() => {
+        this.bscroll.scrollTo(x, y, time);
+      }, 100);
     },
     finishPullUp() {
       this.bscroll.finishPullUp();

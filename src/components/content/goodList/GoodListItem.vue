@@ -1,6 +1,6 @@
 <template>
     <div class="GoodListItem" @click="goodsItemClick">
-      <img :src="goodsitem.show.img" alt="" @load="imgLoad">
+      <img :src="showImage" alt="" @load="imgLoad">
       <div class="goodinfo">
         <p class="collect">{{goodsitem.title}}</p>
         <span class="price">{{goodsitem.price}}</span>
@@ -16,6 +16,14 @@
       goodsitem: {
         type: Object,
         default: {}
+      }
+    },
+    computed: {
+      showImage() {
+        if(! this.goodsitem.show)
+          return this.goodsitem.image
+        else 
+          return this.goodsitem.show.img
       }
     },
     methods: {

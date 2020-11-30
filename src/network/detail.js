@@ -8,6 +8,12 @@ export function getDetail(iid) {
     }
   })
 }
+
+export function getRecommend() {
+  return request({
+    url: '/recommend'
+  })
+}
 //将服务器返回的杂乱数据整合; 抽离数据
 
 //基本信息数据

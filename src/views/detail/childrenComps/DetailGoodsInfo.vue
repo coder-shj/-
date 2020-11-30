@@ -36,7 +36,7 @@
     methods: {
       imgload() {
         // 所有图片加载完之后，发射一次
-        if (++this.counter == this.imagesLenth){
+        if (++this.counter == this.imagesLenth || this.counter%5 == 0){
           this.$emit('imageload')
         }
       }
