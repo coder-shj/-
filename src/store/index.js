@@ -3,16 +3,16 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
-  },
-  getters:{
+import state from './state.js'
+import actions from './actions.js'
+import mutations from './mutations.js'
+import getters from './getters.js'
 
-  },
-  mutations: {
-  },
-  actions: {
-  },
+export default new Vuex.Store({
+  state,
+  getters,
+  mutations,
+  actions,
   modules: {
   }
 })

@@ -33,6 +33,7 @@
     methods: {
       itemClick(index) {
         this.nowIndex = index
+        this.$emit('itemClick', index)
       },
       backClick() {
         this.$router.back()

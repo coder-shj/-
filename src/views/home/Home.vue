@@ -48,10 +48,9 @@ import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/common/tabControl/TabControl.vue";
 import GoodList from "components/content/goodList/GoodList";
 import BetterScroll from "components/common/betterScroll/BetterScroll.vue";
-import BackTop from "components/content/backTop/BackTop.vue";
 
 import { getHomeMultidate, getHomeGoods } from "network/home";
-import {itemListenerMinxin} from 'common/mixin.js'
+import {itemListenerMinxin, BackTopMixin} from 'common/mixin.js'
 
 export default {
   name: "Home",
@@ -62,10 +61,9 @@ export default {
     FeatureView,
     TabControl,
     GoodList,
-    BetterScroll,
-    BackTop,
+    BetterScroll
   },
-  mixins: [itemListenerMinxin],
+  mixins: [itemListenerMinxin, BackTopMixin],
   computed: {
     showGoods() {
       return this.goods[this.nowType].list;
@@ -81,7 +79,6 @@ export default {
         sell: { page: 0, list: [] },
       },
       nowType: "pop",
-      showtop: false,
       tabOffsetTop: 0,
       isTabFixed: false,
       scollY: 0,
@@ -133,9 +130,6 @@ export default {
       // 获取tabControl的offsetTop
       // 所有的组件都有一个属性$el，用于获取组件内的元素
       this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop;
-    },
-    topclick() {
-      this.$refs.wrapper.scrollTo(0, 0);
     },
     tabclick(index) {
       switch (index) {
@@ -233,5 +227,10 @@ export default {
   left: 0%;
   right: 0%;
   overflow: hidden;
+}
+.backtop {
+  position: absolute;
+  right: 10px;
+  bottom: 45px;
 }
 </style>
