@@ -10,6 +10,7 @@ export default {
     payload.count++
   },
   [ADDTOCART](state, payload) {
+    payload.isSelect = true
     state.cartList.push(payload)
   }
 }

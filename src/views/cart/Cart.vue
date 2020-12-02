@@ -6,12 +6,14 @@
     <better-scroll ref="scroll" class="content">
       <cart-list></cart-list>
     </better-scroll>
+    <cart-bottom-bar></cart-bottom-bar>
   </div>
   
 </template>
 
 <script>
   import CartList from './childrenComps/CartList'
+  import CartBottomBar from './childrenComps/CartBottomBar'
 
   import BetterScroll from "components/common/betterScroll/BetterScroll.vue"
   import NavBar from 'components/common/navbar/NavBar'
@@ -23,11 +25,11 @@
     components: {
       BetterScroll,
       NavBar,
-      CartList
+      CartList,
+      CartBottomBar
     },
     activated() {
-      console.log('create');
-      this.$refs.scroll.bscroll.refresh
+      this.$refs.scroll.refresh()
     },
     computed: {
       // mapGetters的两种应用的方式
@@ -55,6 +57,7 @@
     top: 44px;
     left: 0;
     right: 0;
+    bottom: 93px;
     overflow: hidden;
   }
 </style>
