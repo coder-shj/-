@@ -32,6 +32,7 @@
   import {itemListenerMinxin} from 'common/mixin.js'
   import {debounce} from 'common/utils.js'
   import {BackTopMixin} from 'common/mixin.js'
+  import {mapActions} from 'vuex'
 
   export default {
     name: "detail",
@@ -121,6 +122,7 @@
       this.$bus.$off('itemImgLoad', this.refresh)
     },
     methods: {
+      ...mapActions(['addCart']),
       cartAdd() {
         const product = {}
         product.image = this.topImages[0]
@@ -129,7 +131,15 @@
         product.price = this.goods.realPrice
         product.iid = this.id
 
-        this.$store.dispatch('addCart', product)
+        // 1、普通调用store中的actions
+        // this.$store.dispatch('addCart', product).then(res => {
+        //   console.log(res);
+        // })
+        
+        // 2、使用mapActions调用store中的actions
+        this.addCart(product).then(res => {
+          this.$toast.show(res, 1500)
+        })
       }
       ,imageload() {
         // 刷新betterscroll

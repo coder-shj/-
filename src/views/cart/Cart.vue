@@ -57,7 +57,7 @@
     top: 44px;
     left: 0;
     right: 0;
-    bottom: 93px;
+    bottom: 89px;
     overflow: hidden;
   }
 </style>

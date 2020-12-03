@@ -27,5 +27,6 @@
 
   .center {
     flex: 1;
+    font-size: 14px;
   }
 </style>

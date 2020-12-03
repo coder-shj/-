@@ -75,7 +75,7 @@
     width: 70%;
     font-size: 17px;
     color: #333;
-    padding: 5px 10px;
+    padding-left: 5%;
     position: relative;
     overflow: hidden;
   }
@@ -95,6 +95,7 @@
   }
 
   .info-bottom .item-price {
+    padding-left: 3%;
     color: orangered;
   }
 </style>
